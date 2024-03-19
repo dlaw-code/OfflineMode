@@ -1,0 +1,6 @@
+@OfflineMode.API_HostAddress = http://localhost:5237
+
+GET {{OfflineMode.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
