@@ -14,7 +14,7 @@ using static OfflineMode.DATA.Entities.Test;
 
 namespace OfflineMode.DATA.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
