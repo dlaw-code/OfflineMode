@@ -11,20 +11,18 @@ namespace OfflineMode.API.Services.Implementation
     public class OfflineService : IOffline
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        //private readonly RoleManager<IdentityRole> _roleManager;
+        
 
-        public OfflineService(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public OfflineService(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
-            //    _roleManager = roleManager;
-            //
+           
         }
 
 
         public async Task AddCourse(CourseRequest courseRequest, string userId)
         {
+            
             var course = new Course
             {
                 Title = courseRequest.Title,
@@ -46,7 +44,7 @@ namespace OfflineMode.API.Services.Implementation
                 Id = t.Id,
                 Title = t.Title,
                 Description = t.Description,
-                UserId = t.UserId,
+                //UserId = t.user,
                 //ImageUrl = t.ImageUrl,
                 
                
@@ -69,6 +67,9 @@ namespace OfflineMode.API.Services.Implementation
             await _context.SaveChangesAsync();
         }
 
+
+
         
     }
 }
+
