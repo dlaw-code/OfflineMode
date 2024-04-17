@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfflineMode.API.Services.Interface;
 using OfflineMode.DATA.Data;
@@ -44,10 +45,10 @@ namespace OfflineMode.API.Services.Implementation
                 Id = t.Id,
                 Title = t.Title,
                 Description = t.Description,
-                //UserId = t.user,
+                UserId = t.UserId,
                 //ImageUrl = t.ImageUrl,
-                
-               
+
+
             }).ToList();
         }
 
@@ -67,9 +68,24 @@ namespace OfflineMode.API.Services.Implementation
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> DeleteTweet(int id)
+        {
+
+            // Retrieve the Course from the database
+            var tweet = await _context.Courses.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (tweet == null)
+            {
+                return false; // Tweet not found
+            }
+
+            _context.Courses.Remove(tweet);
+            await _context.SaveChangesAsync();
+
+            return true; // Tweet successfully deleted
+        }
 
 
-        
     }
 }
 

@@ -8,7 +8,7 @@ namespace OfflineMode.API.Services.Interface
         Task AddCourse(CourseRequest courseRequest, string userId);
         Task<List<CourseDTO>> GetCourses();
         Task UpdateCourse(int courseId, UpdateRequest updateRequest, string userId);
-       
+        Task<bool> DeleteTweet(int id);
         //Task CreateRole(string roleName);
         //Task AssignRoleToUser(string userId, string roleName);
         //Task<bool> UserHasRole(string userId, string roleName);

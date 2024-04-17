@@ -22,13 +22,9 @@ namespace OfflineMode.API.Controllers
 
         [HttpPost("addCourse")]
         [Authorize(Roles = "Admin")]
-       
-        
-        public async Task<ActionResult<CourseDTO>> AddCourse([FromBody] CourseRequest courseRequest)
+       public async Task<ActionResult<CourseDTO>> AddCourse([FromBody] CourseRequest courseRequest)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
-
             if (courseRequest == null)
             {
                 return BadRequest("Course request object is null.");
@@ -44,7 +40,6 @@ namespace OfflineMode.API.Controllers
         /*[AllowAnonymous]*/ // Helps in testing endpoint without token
         public async Task<IActionResult> GetCourses()
         {
-            //var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
             var courses = await _offlineService.GetCourses();
             return Ok(courses);
         }
@@ -62,13 +57,28 @@ namespace OfflineMode.API.Controllers
             }
 
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
+            //var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
             await _offlineService.UpdateCourse( courseId, updateRequest, userId);
 
             return Ok("Course updated successfully.");
         }
 
 
+        [HttpPost]
+        [Route("DeleteCourse/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteCourse(int id)
+        {
+            var result = await _offlineService.DeleteTweet(id);
+            if (result)
+            {
+                return Ok(); // Status code 200: Tweet successfully deleted
+            }
+            else
+            {
+                return NotFound(); // Status code 404: Tweet not found
+            }
+        }
 
     }
 }

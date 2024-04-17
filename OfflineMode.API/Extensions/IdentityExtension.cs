@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
 
-namespace OfflineMode.DATA.Data
+namespace OfflineMode.API.Extensions
 {
-    public static class IdentityExtensions
+    public static class IdentityExtension
     {
         public static async Task RegisterAsync(this HttpContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
