@@ -29,7 +29,9 @@ namespace OfflineMode.API.Services.Implementation
                 Title = courseRequest.Title,
                 Description = courseRequest.Description,
                 UserId = userId,
-            };
+            };    
+
+
 
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
